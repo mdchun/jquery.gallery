@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../../lib/seaJs/sea.js"></script>
+	<script src="../../lib/jquery/jquery.js"></script>
+	<script src="autoselect.js"></script>
+</head>
+<body>
+	<div>
+		<input type="text" class="auto-select" />
+		<input type="text" class="auto-select" />
+		<input type="text" id="auto-select" />
+	</div>
+	<script>
+$(function(){
+
+	// seajs.use('./test')
+	// 
+	seajs.use('./autoselect',function(autoselect){
+		autoselect('.auto-select',{
+
+		});
+	});
+
+	// $('#auto-select').autoselect({
+	// 	b:111
+	// });
+	
+	
+
+})
+	</script>
+</body>
+</html>

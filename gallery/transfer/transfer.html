@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transfer</title>
+	<link rel="stylesheet" href="transfer.css" />
+	<script src="../../lib/seaJs/sea.js"></script>
+	<script src="../../lib/jquery/jquery.js"></script>
+	<script src="../../lib/handlebars/handlebars.js"></script>
+	
+</head>
+<body>
+
+	<div class="J_Container"></div>
+	<pre class="J_Result"></pre>
+	<script id="J_tpl" type="text/x-handlebars-template">
+	<table class="transfer-container">
+	    <thead>
+	        <tr>
+	            <th>{{i18n.unselected}}</th>
+	            <th>&nbsp;</th>
+	            <th>{{i18n.selected}}</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>
+	                <ul class="J_Left transfer-block">
+	                    {{#each data}}
+	                        {{#unless choose}}
+	                            <li>
+	                                <a href="javascript:;" title="{{description}}" class="J_Item" data-index="{{@index}}">
+	                                    {{name}}
+	                                </a>
+	                            </li>
+	                        {{/unless}}
+	                    {{/each}}
+	                </ul>
+	            </td>
+	            <td class="transfer-buttons">
+	                <a href="javascript:;" class="J_Transfer" data-direction="left"></a><br><a href="javascript:;" class="J_Transfer" data-direction="right"></a>
+	            </td>
+	            <td>
+	                <ul class="J_Right transfer-block">
+	                    {{#each data}}
+	                        {{#if choose}}
+	                            <li>
+	                                <a href="javascript:;" title="{{description}}" class="J_Item" data-index="{{@index}}">
+	                                    {{name}}
+	                                </a>
+	                            </li>
+	                        {{/if}}
+	                    {{/each}}
+	                </ul>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	</script>
+	<script type="text/javascript">
+
+	seajs.use('./transfer',function(Transfer){
+		var mockData = [];
+	    var len = Math.random() * 10 + 10;
+	    for (var i = 0; i < len; i++) {
+	        mockData.push({
+	            name: '内容' + (i + 1),
+	            description: '内容' + (i + 1) + '的描述',
+	            choose: Math.random() * 2 > 1
+	        });
+	    }
+	    // {
+	    //   name: "内容",
+	    //   description: "描述",
+	    //   choose: 是否选中
+	    // }
+	    var transfer = new Transfer({
+	        element: '.J_Container',
+	        // locale: 'zh-cn',
+	        // autoFocus: false,
+	        model: mockData
+	    });
+	    transfer.on('change:model', output);
+	    output();
+	    // 输出结果
+	    function output() {
+	        $('.J_Result').html(JSON.stringify(transfer.getSelected(), null, '  '));
+	    }
+
+	})
+
+
+	</script>
+</body>
+</html>
