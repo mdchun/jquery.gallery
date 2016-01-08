@@ -5,14 +5,37 @@
 	<title>Document</title>
 	<script src="../../lib/seaJs/sea.js"></script>
 	<script src="../../lib/jquery/jquery.js"></script>
-	<script src="autoselect.js"></script>
+	<!--<script src="../../lib/zepto/zepto.js"></script>
+	<script src="../../lib/zepto/touch.js"></script>
+	<script src="../../lib/zepto/event.js"></script>-->
+	<!--<script src="autoselect.js"></script>-->
+	<style>
+	*{margin:0; padding: 0;}
+	li.active{
+		background: red;
+	}
+
+	.searchCar-warp{
+		position: absolute;
+		top:20px;
+		z-index: 10;
+		background: #fff;
+		border:1px solid #ccc;
+		width: 173px;
+		left: 0;
+	}
+	</style>
 </head>
 <body>
 	<div>
 		<input type="text" class="auto-select" />
-		<input type="text" class="auto-select" />
-		<input type="text" id="auto-select" />
+		
 	</div>
+	<div>
+		<input type="text" class="auto-select" />
+		
+	</div>
+		<input type="text" id="auto-select" />
 	<script>
 $(function(){
 
@@ -20,7 +43,13 @@ $(function(){
 	// 
 	seajs.use('./autoselect',function(autoselect){
 		autoselect('.auto-select',{
-
+			listNumber :10,
+			activeCallback : function(index){
+				// alert(index);
+			},
+			selectedCallback : function(index,value){
+				// alert(index+':'+value)
+			}
 		});
 	});
 
